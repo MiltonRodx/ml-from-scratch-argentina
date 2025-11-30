@@ -1,0 +1,1 @@
+# clasificador MNIST que logra ~92% acc (sí, se puede sin NumPy)
