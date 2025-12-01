@@ -19,26 +19,75 @@ class Employee:
     def set_raise_amt(cls, amount): # this is going to pass the class itself as an arg
         cls.raise_amount = amount
 
-emp_1 = Employee("Juan", "Romero", 900422)
-emp_1.stats()
-emp_1.raise_salary()
-emp_1.stats()
-print(emp_1.raise_amount)
-print(Employee.raise_amount)
+# inheritance
+class Developer(Employee):
+    raise_amount = 1.15
 
-emp_2 = Employee("Martin", "Sanchez", 5320000)
-emp_2.stats()
-emp_2.raise_salary()
-emp_2.stats()
-print(emp_2.raise_amount)
-print(Employee.raise_amount)
+    def __init__(self, first, last, payment, prog_lang):
+        super().__init__(first, last, payment)
+        self.prog_lang = prog_lang
 
-print(emp_2.__dict__)
-print(Employee.num_of_emps)
+class Manager(Employee):
+    def __init__(self, name, surname, payment, employees=None):
+        super().__init__(name, surname, payment)
+        if employees is None:
+            self.employees = []
+        else:
+            self.employees = employees
 
-print(Employee.raise_amount)
-Employee.set_raise_amt(1.14)
-print(Employee.raise_amount)
-print(emp_1.raise_amount)
-print(emp_2.raise_amount)
-print(emp_2.raise_amount)
+    def add_emp(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+    def remove_emp(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+
+    def print_emps(self):
+        for employee in self.employees:
+            print(self.__dict__(employee))
+
+
+
+# testing & print
+# emp_1 = Employee("Juan", "Romero", 900422)
+# emp_1.stats()
+# emp_1.raise_salary()
+#emp_1.stats()
+#print(Employee.raise_amount)
+
+#emp_2 = Employee("Martin", "Sanchez", 5320000)
+#emp_2.stats()
+#emp_2.raise_salary()
+#emp_2.stats()
+#print(emp_2.raise_amount)
+#print(Employee.raise_amount)
+
+#print(emp_2.__dict__)
+#print(Employee.num_of_emps)
+
+#print(Employee.raise_amount)
+#Employee.set_raise_amt(1.14)
+#print(Employee.raise_amount)
+#print(emp_1.raise_amount)
+#print(emp_2.raise_amount)
+#print(emp_2.raise_amount)
+
+man = Manager("Julio", "Acosta", 1999999, None)
+man.print_emps()
+
+
+dev_1 = Developer("Corey", "Schafer", 45000000, "Python")
+dev_2 = Developer("Sandro", "Sanchez", 653000, "Java")
+dev_3 = Developer("Hola", "Mundo", 333333333333333333333, "Javascript")
+dev_1.stats()
+dev_2.stats()
+dev_3.stats()
+print(dev_1.__dict__)
+
+print("\n")
+print(dev_1.payment)
+dev_1.raise_salary()
+print(dev_1.payment)
+
+man.print_emps()
